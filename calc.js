@@ -12,12 +12,15 @@ const sbtrctBtn = document.querySelector('#subtract');
 const Disp = document.querySelector('.display');
 const lastDisp = document.querySelector('.lastresult');
 const decBtn = document.querySelector('#decimal');
+const clrBtn = document.querySelector('#clear');
 
 let valueSwitch = false;
 let resultSwitch = false;
 let decSwitch = false;
 
 let displayValue;
+
+clrBtn.addEventListener('click',dispClear);
 
 decBtn.addEventListener('click',addDecimal);
 
@@ -27,6 +30,20 @@ divBtn.addEventListener('click',setOperator);
 mltplyBtn.addEventListener('click',setOperator);
 addBtn.addEventListener('click',setOperator);
 sbtrctBtn.addEventListener('click',setOperator);
+
+function dispClear(){
+
+    Operator=""
+    valueOne=""
+    valueTwo=""
+    Result=""
+    valueSwitch=false;
+    resultSwitch=false;
+    decSwitch=false;
+    Disp.textContent = "0"
+    lastDisp.textContent = "0"
+
+}
 
 function setOperator(e){
     
