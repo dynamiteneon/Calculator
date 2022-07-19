@@ -4,20 +4,72 @@ let valueOne = "";
 let valueTwo = "";
 let Result;
 
-const equalBtn = document.querySelector('.equalbutton');
+const equalBtn = document.querySelector('#equals');
+const divBtn = document.querySelector('#divide');
+const mltplyBtn = document.querySelector('#multiply');
+const addBtn = document.querySelector('#add');
+const sbtrctBtn = document.querySelector('#subtract');
+const Disp = document.querySelector('.display');
+const lastDisp = document.querySelector('.lastresult');
+const decBtn = document.querySelector('#decimal');
 
 let valueSwitch = false;
+let resultSwitch = false;
 
 let displayValue;
 
-equalBtn.addEventListener('click',Calculate)
+decBtn.addEventListener('click',addDecimal);
+
+equalBtn.addEventListener('click',Calculate);
+
+divBtn.addEventListener('click',setOperator);
+mltplyBtn.addEventListener('click',setOperator);
+addBtn.addEventListener('click',setOperator);
+sbtrctBtn.addEventListener('click',setOperator);
+
+function setOperator(e){
+    
+    let opr = e.target.id;
+    resultSwitch = false;
+
+    if(opr=="divide"){
+        Operator="/";
+    }
+
+    else if(opr=="add"){
+        Operator="+";
+    }
+    
+    else if(opr=="subtract"){
+        Operator="-";
+    }
+    
+    else if(opr=="multiply"){
+        Operator="*";
+    }    
+
+    else{
+
+    }
+    
+    console.log(opr);
+    console.log(Operator);
+    
+    last = Disp.textContent;
+    lastDisp.textContent = last;
+    Disp.textContent = "0";
+    
+
+    valueSwitch = true;
+
+}
 
 function Addition(a,b){
-    return a+b;
+    return Number(a)+Number(b);
 }
 
 function Subtraction(a,b){
-    return a-b;
+    return Number(a)-Number(b);
 }
 
 function Division(a,b){
@@ -30,33 +82,49 @@ function Multiplication(a,b){
 }
 
 function Calculate(){
+
     if(valueOne=="" || valueTwo=="" || Operator==""){
-    console.log("no value")
+
+    }
+
+    else if(Operator=="/" && valueTwo=="0"){
+        Disp.textContent = "div/0 error"
     }
 
     else{
 
     
         if(Operator=="+"){
-            return Addition(valueOne,valueTwo);
+            Result = Addition(valueOne,valueTwo);
+            Disp.textContent = Result;
         }
 
         else if(Operator=="-"){
-            return Subtraction(valueOne,valueTwo);
+            Result = Subtraction(valueOne,valueTwo);
+            Disp.textContent = Result;
         }
 
         else if(Operator=="*"){
-            return Multiplication(valueOne,valueTwo);
+            Result = Multiplication(valueOne,valueTwo);
+            Disp.textContent = Result;
         }
-
+        
         else if(Operator=="/"){
-            return Division(valueOne,valueTwo);
+            Result = Division(valueOne,valueTwo);
+            Disp.textContent = Result;
         }
     }
 
+    lastDisp.textContent = valueTwo;
+    valueTwo = "";
+    Operator = "";
+    valueOne = Result;
+    valueSwitch = true;
+    resultSwitch = true;
+
 }
 
-for(i=0;i<9;i++){
+for(i=0;i<10;i++){
 
     let btn = document.querySelector(`#num${i}`)
     btn.addEventListener('click',numberPress);
@@ -64,17 +132,39 @@ for(i=0;i<9;i++){
 }
 
 
-function numberPress(e){
+function addDecimal(){
 
-    let num = e.target.id;
-    num = num.replace('num','');
-    valueOne = valueOne + "" + num;
-    
-    if(valueSwitch==false){
+    if(valueSwitch==false && resultSwitch==false){
+        valueOne = valueOne + "."
         displayValue=valueOne;
     }
 
-    let disp = document.querySelector('.display');
-    disp.textContent = displayValue;
+    else if(valueSwitch==true){
+        valueTwo = valueTwo + "."
+        displayValue=valueTwo;
+    }
+    
+    console.log("decimal");
+    Disp.textContent = displayValue;
+
+}
+
+function numberPress(e){
+
+    let num = e.target.id;
+    
+    if(valueSwitch==false && resultSwitch==false){
+        num = num.replace('num','');
+        valueOne = valueOne + "" + num;
+        displayValue=valueOne;
+    }
+
+    else if(valueSwitch==true){
+        num = num.replace('num','');
+        valueTwo = valueTwo + "" + num;
+        displayValue=valueTwo;
+    }
+
+    Disp.textContent = displayValue;
 
 }
