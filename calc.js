@@ -15,6 +15,7 @@ const decBtn = document.querySelector('#decimal');
 
 let valueSwitch = false;
 let resultSwitch = false;
+let decSwitch = false;
 
 let displayValue;
 
@@ -61,6 +62,7 @@ function setOperator(e){
     
 
     valueSwitch = true;
+    decSwitch = false;
 
 }
 
@@ -121,6 +123,7 @@ function Calculate(){
     valueOne = Result;
     valueSwitch = true;
     resultSwitch = true;
+    decSwitch = false;
 
 }
 
@@ -134,18 +137,32 @@ for(i=0;i<10;i++){
 
 function addDecimal(){
 
-    if(valueSwitch==false && resultSwitch==false){
-        valueOne = valueOne + "."
-        displayValue=valueOne;
+    if(decSwitch==true){
+
     }
 
+    else if(decSwitch==false){
+
+    if(valueSwitch==false && resultSwitch==false){
+
+        valueOne = valueOne + "."
+        displayValue=valueOne;
+
+        }
+
+
     else if(valueSwitch==true){
+
         valueTwo = valueTwo + "."
         displayValue=valueTwo;
+
     }
     
+}
+
     console.log("decimal");
     Disp.textContent = displayValue;
+    decSwitch = true;
 
 }
 
