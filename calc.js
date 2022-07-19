@@ -115,22 +115,22 @@ function Calculate(){
     
         if(Operator=="+"){
             Result = Addition(valueOne,valueTwo);
-            Disp.textContent = Result;
+            Disp.textContent = Result.toFixed(2);
         }
 
         else if(Operator=="-"){
             Result = Subtraction(valueOne,valueTwo);
-            Disp.textContent = Result;
+            Disp.textContent = Result.toFixed(2);
         }
 
         else if(Operator=="*"){
             Result = Multiplication(valueOne,valueTwo);
-            Disp.textContent = Result;
+            Disp.textContent = Result.toFixed(2);
         }
         
         else if(Operator=="/"){
             Result = Division(valueOne,valueTwo);
-            Disp.textContent = Result;
+            Disp.textContent = Result.toFixed(2);
         }
     }
 
