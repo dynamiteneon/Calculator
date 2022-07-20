@@ -279,22 +279,19 @@ function Calculate(){
     
         if(Operator=="+"){
             Result = Addition(valueOne,valueTwo);
-            Disp.textContent = Result.toFixed(2);
         }
 
         else if(Operator=="-"){
             Result = Subtraction(valueOne,valueTwo);
-            Disp.textContent = Result.toFixed(2);
+
         }
 
         else if(Operator=="*"){
             Result = Multiplication(valueOne,valueTwo);
-            Disp.textContent = Result.toFixed(2);
         }
         
         else if(Operator=="/"){
             Result = Division(valueOne,valueTwo);
-            Disp.textContent = Result.toFixed(2);
         }
     }
     if(valueTwo!=""){
@@ -302,12 +299,14 @@ function Calculate(){
     }
 
     else{}
+
     valueTwo = "";
     Operator = "";
     valueOne = Result;
     valueSwitch = true;
     resultSwitch = true;
     decSwitch = false;
+    Disp.textContent = Result.toFixed(2);
 
 }
 
@@ -360,10 +359,17 @@ function numberPress(e){
         displayValue=valueOne;
     }
 
-    else if(valueSwitch==true){
+    else if(valueSwitch==true && Operator!=""){
         num = num.replace('num','');
         valueTwo = valueTwo + "" + num;
         displayValue=valueTwo;
+    }
+
+    else if(valueSwitch==true && resultSwitch==true && Operator==""){
+        dispClear();
+        num = num.replace('num','');
+        valueOne = valueOne + "" + num;
+        displayValue=valueOne;
     }
 
     Disp.textContent = displayValue;
@@ -377,9 +383,15 @@ function numberKey(keynum){
         displayValue=valueOne;
     }
 
-    else if(valueSwitch==true){
+    else if(valueSwitch==true && Operator!=""){
         valueTwo = valueTwo + "" + keynum;
         displayValue=valueTwo;
+    }
+
+    else if(valueSwitch==true && resultSwitch==true && Operator==""){
+        dispClear();
+        valueOne = valueOne + "" + keynum;
+        displayValue=valueOne;
     }
 
     Disp.textContent = displayValue;
